@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlexCare | Hand Rehabilitation System</title>
+<style>
+:root{--bg:#0b1220;--panel:#111c2e;--ink:#eaf2ff;--muted:#9eb0c9;--line:#263852;--blue:#55d9e8;--blue2:#4f83b5;--teal:#70e0ad;--orange:#ffad62;--red:#f05270;--navy:#0b1220;--shadow:0 12px 30px rgba(0,0,0,.22)}
+*{box-sizing:border-box}body{margin:0;background:#0b1220;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer;border:0}
+.app{display:grid;grid-template-columns:244px 1fr;min-height:100vh}.sidebar{background:#08111f;color:white;padding:27px 18px;display:flex;flex-direction:column;gap:28px;box-shadow:5px 0 18px #142b4510}.brand{display:flex;gap:11px;align-items:center;padding:0 8px}.logo{width:42px;height:42px;border-radius:10px;background:#17314a;color:#55d9e8;display:grid;place-items:center;font-size:22px;box-shadow:none}.brand b{display:block;font-size:17px;letter-spacing:.2px}.brand small{color:#aebbd4;font-size:11px;letter-spacing:1.4px}.nav-label{color:#8e9fbd;font-size:10px;font-weight:800;letter-spacing:1.6px;padding:0 12px;margin-bottom:-15px}.nav{display:grid;gap:7px}.nav button{display:flex;align-items:center;gap:12px;padding:13px 12px;border-radius:12px;color:#bdc9dd;background:transparent;text-align:left;font-weight:600;font-size:13px}.nav button .ico{width:22px;text-align:center;font-size:17px}.nav button.active,.nav button:hover{background:#172840;color:white;backdrop-filter:none}.nav button.active{box-shadow:inset 3px 0 #69ddc3}.side-bottom{margin-top:auto;background:#111c2e;border:1px solid #263852;padding:15px;border-radius:15px}.side-bottom small{color:#a9bad5}.side-bottom p{font-size:12px;line-height:1.5;color:#dbe5f4;margin:8px 0 0}.main{padding:27px clamp(18px,3vw,42px);min-width:0}.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:28px}.eyebrow{color:var(--blue);font-size:11px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase}.topbar h1{font-size:clamp(23px,2.5vw,31px);letter-spacing:-.8px;margin:5px 0 0}.top-actions{display:flex;align-items:center;gap:10px}.connection{display:flex;align-items:center;gap:8px;background:#111c2e;border:1px solid var(--line);padding:10px 13px;border-radius:12px;font-size:12px;font-weight:700}.dot{width:8px;height:8px;border-radius:50%;background:#f0ad4e;box-shadow:0 0 0 4px #fff3df}.avatar{width:39px;height:39px;border-radius:13px;background:#e5eaff;color:#3f59dc;display:grid;place-items:center;font-weight:800}.page{display:none;animation:fade .25s ease}.page.active{display:block}@keyframes fade{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}.welcome{display:flex;justify-content:space-between;align-items:center;gap:20px;background:linear-gradient(120deg,#142239,#173b58);color:white;padding:26px 28px;border-radius:14px;box-shadow:0 8px 20px #17385412;margin-bottom:20px;overflow:hidden;position:relative}.welcome:after{content:"";position:absolute;width:230px;height:230px;border:1px solid #ffffff22;border-radius:50%;right:10%;top:-135px;box-shadow:0 0 0 28px #ffffff08,0 0 0 60px #ffffff05}.welcome h2{margin:7px 0;font-size:22px}.welcome p{color:#d5def6;margin:0;font-size:13px;line-height:1.6;max-width:570px}.welcome .btn{position:relative;z-index:1;white-space:nowrap}.btn{padding:11px 16px;border-radius:11px;font-size:12px;font-weight:800;transition:.15s}.btn.primary{background:var(--blue);color:white;box-shadow:0 6px 14px #4668f533}.btn.primary:hover{background:#3555e7;transform:translateY(-1px)}.btn.light{background:white;color:#26385e}.btn.ghost{background:#eaf1f7;color:#245b8f}.btn.outline{border:1px solid var(--line);background:white;color:var(--ink)}.btn.danger{background:#fff0f1;color:#c63d4a}.section-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 13px;gap:12px}.section-head h3{margin:0;font-size:16px;letter-spacing:-.3px}.section-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:#111c2e;border:1px solid var(--line);border-radius:13px;padding:19px;box-shadow:var(--shadow);min-width:0;backdrop-filter:none}.stat-top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px;font-weight:650}.stat-icon{height:34px;width:34px;border-radius:9px;background:#172840;color:#55d9e8;display:grid;place-items:center;font-size:16px}.stat-value{font-size:28px;font-weight:800;letter-spacing:-1px;margin:13px 0 3px}.stat-foot{font-size:11px;color:var(--muted)}.green{color:#159b7d}.blue{color:var(--blue)}.two-col{grid-template-columns:minmax(0,1.4fr) minmax(280px,.9fr)}.activity-row{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #edf0f5}.activity-row:last-child{border-bottom:0}.activity-icon{width:39px;height:39px;display:grid;place-items:center;background:#f0f3ff;border-radius:12px}.activity-row b{font-size:13px}.activity-row small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.pill{font-size:10px;font-weight:800;border-radius:20px;padding:6px 9px;background:#e8f4ef;color:#26735d;margin-left:auto;white-space:nowrap}.pill.amber{background:#f8f0e3;color:#94651f}.progress-track{height:7px;background:#edf0f6;border-radius:20px;overflow:hidden}.progress-fill{height:100%;width:0;background:#278a83;border-radius:20px;transition:width .4s;box-shadow:none}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field label{display:block;font-size:11px;font-weight:800;color:#5d6b80;margin-bottom:7px}.field input,.field select{width:100%;padding:12px 13px;border:1px solid #dfe6f0;border-radius:11px;background:#fbfcff;color:var(--ink);outline:none}.field input:focus,.field select:focus{border-color:#8294ff;box-shadow:0 0 0 3px #4668f51a}.field.full{grid-column:1/-1}.helper{font-size:11px;color:var(--muted);line-height:1.6}.exercise-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.exercise{padding:18px;border:1px solid var(--line);border-radius:13px;background:#111c2e;cursor:pointer;transition:.2s;position:relative}.exercise:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.exercise.selected{border:2px solid #55d9e8;background:#14263b;padding:17px;box-shadow:0 0 0 2px #2c6a9310}.exercise .ex-icon{font-size:25px;margin-bottom:13px}.exercise b{display:block;font-size:14px}.exercise p{color:var(--muted);font-size:11px;line-height:1.5;min-height:33px}.exercise small{color:var(--blue);font-weight:800;font-size:10px}.tag{position:absolute;right:12px;top:12px;color:var(--blue);font-size:10px;font-weight:900}.session-layout{grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);align-items:start}.session-header{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:16px}.session-header h2{font-size:20px;margin:0 0 5px}.session-header p{margin:0;color:var(--muted);font-size:12px}.live-badge{display:flex;align-items:center;gap:7px;background:#f8f0e3;color:#94651f;padding:8px 10px;border-radius:10px;font-size:10px;font-weight:900;white-space:nowrap}.live-badge.running{background:#e3faf4;color:#16866e}.live-badge .dot{background:currentColor;box-shadow:none;width:6px;height:6px}.angle-stage{display:grid;grid-template-columns:1fr 1fr;gap:12px}.angle-box{background:#0c1727;border:1px solid #24364f;border-radius:12px;padding:16px;position:relative;overflow:hidden}.angle-label{font-size:11px;color:var(--muted);font-weight:750}.angle-number{font-size:38px;letter-spacing:-1.5px;font-weight:850;margin:7px 0}.angle-number span{font-size:15px;color:var(--muted);letter-spacing:0}.angle-note{font-size:10px;color:var(--muted)}.hand-stage{height:225px;border-radius:13px;background:radial-gradient(ellipse at 50% 43%,#203a55 0%,#101d30 55%,#0b1422 100%);border:1px solid #263852;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;margin:15px 0}.hand-stage:before{content:'';position:absolute;width:170px;height:170px;border:1px solid #245b8f16;border-radius:50%;box-shadow:0 0 0 20px #245b8f05,0 0 0 42px #168b8304}.hand-stage:after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 20%,#ffffff35 48%,transparent 70%);pointer-events:none}.hand-stage svg{width:205px;height:188px;overflow:visible;position:relative;z-index:1;filter:drop-shadow(0 12px 12px #64748b25)}.stage-label{position:absolute;top:14px;left:15px;font-size:10px;letter-spacing:1px;color:#8a96ad;font-weight:900}.stage-caption{position:absolute;bottom:12px;font-size:11px;color:#74809a}.sensor-bars{display:grid;gap:13px;margin:15px 0}.sensor-line{display:grid;grid-template-columns:75px 1fr 42px;gap:10px;align-items:center;font-size:11px}.sensor-line b{font-size:11px;text-align:right}.controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.control-note{background:#fff8e9;border:1px solid #ffedc4;border-radius:12px;padding:11px 13px;color:#8d671d;font-size:11px;line-height:1.5;margin-top:13px}.target-control{display:flex;gap:12px;align-items:center;margin-top:15px}.target-control input{width:100%;accent-color:var(--blue)}.target-control strong{min-width:44px;text-align:right;font-size:15px}.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.mini-stat{padding:13px 10px;background:#f7f9fd;border-radius:12px;text-align:center}.mini-stat b{display:block;font-size:21px}.mini-stat small{font-size:10px;color:var(--muted)}.chart{width:100%;height:160px;background:#0c1727;border:1px solid #24364f;border-radius:10px;padding:4px}.chart svg{width:100%;height:100%}.table{width:100%;border-collapse:collapse;font-size:12px}.table th{text-align:left;color:var(--muted);font-size:10px;letter-spacing:.7px;text-transform:uppercase;padding:11px 8px;border-bottom:1px solid var(--line)}.table td{padding:13px 8px;border-bottom:1px solid #edf0f5}.table tr:last-child td{border:0}.empty{padding:30px;text-align:center;color:var(--muted);font-size:12px}.toast{position:fixed;right:22px;bottom:22px;background:#172746;color:white;padding:13px 17px;border-radius:12px;box-shadow:var(--shadow);font-size:12px;opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s;z-index:10}.toast.show{opacity:1;transform:none}.footer-note{color:#9aa5b7;font-size:10px;text-align:center;margin:24px 0 5px}.live-badge{box-shadow:0 4px 12px #fb923c18}.live-badge.running{box-shadow:0 4px 14px #06b6a022}.stat-value{color:#eaf2ff}.welcome h2{font-size:24px;letter-spacing:-.4px}.welcome p{font-size:13.5px}.btn{transition:transform .16s,box-shadow .16s}.btn:hover{transform:translateY(-1px)}
+@media(max-width:1000px){.app{grid-template-columns:78px 1fr}.sidebar{padding:22px 10px}.brand{justify-content:center;padding:0}.brand-text,.nav-label,.nav button .nav-text,.side-bottom{display:none}.nav button{justify-content:center;padding:13px 5px}.nav button .ico{font-size:19px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.two-col,.session-layout{grid-template-columns:1fr}.exercise-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.app{display:block}.sidebar{position:sticky;top:0;z-index:5;flex-direction:row;padding:10px 12px;align-items:center;justify-content:space-between}.brand{gap:7px}.logo{width:35px;height:35px}.brand-text{display:block}.brand b{font-size:13px}.brand small{font-size:8px}.nav-label,.side-bottom{display:none}.nav{display:flex;gap:2px}.nav button{padding:9px 10px}.nav button .nav-text{display:none}.main{padding:20px 14px}.topbar{align-items:flex-start}.top-actions{gap:6px}.connection{font-size:0;padding:10px}.connection .dot{margin:0}.avatar{width:35px;height:35px}.welcome{padding:20px;display:block}.welcome .btn{margin-top:15px}.stats{gap:10px}.card{padding:14px}.stat-value{font-size:24px}.form-grid,.exercise-grid{grid-template-columns:1fr}.angle-number{font-size:31px}.field.full{grid-column:auto}.topbar h1{font-size:23px}.session-header{align-items:flex-start;flex-direction:column}}
+
+/* Consistent dark surfaces across all pages */
+body,.main{background:#0b1220;color:#eaf2ff}
+.topbar h1,.card h2,.card h3,.section-head h3{color:#eaf2ff}
+input,select,textarea{background:#0c1727!important;color:#eaf2ff!important;border-color:#30435c!important}
+.btn.ghost,.btn.outline{background:#172840;color:#eaf2ff;border-color:#344d69}
+.table-wrap,table{background:#111c2e;color:#eaf2ff}th{background:#172840!important;color:#c7d7e9!important}td{border-color:#263852!important}
+.helper,.muted,.field small{color:#9eb0c9}.progress-track,.progress{background:#263852}.welcome p{color:#d2dfed}
+
+.fc3d-wrap{background:#0e1929;border:1px solid #263852;border-radius:16px;padding:18px;margin-bottom:18px;box-shadow:0 12px 30px #0003}
+.fc3d-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px;flex-wrap:wrap}.fc3d-eyebrow{font-size:10px;letter-spacing:.15em;font-weight:800;color:#55d9e8}.fc3d-head h2{margin:6px 0;color:#f0f6ff;font-size:20px}.fc3d-head p{margin:0;color:#9eb0c9;font-size:12px}
+.fc3d-status{font-size:10px;font-weight:800;color:#70e0ad;background:#12372f;border:1px solid #245346;border-radius:999px;padding:7px 10px}.fc3d-status i{display:inline-block;width:6px;height:6px;background:#70e0ad;border-radius:50%;margin-right:6px}
+.fc3d-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.8fr);gap:14px}.fc3d-viewer{height:470px;position:relative;border:1px solid #263852;border-radius:12px;overflow:hidden;background:radial-gradient(ellipse at 50% 43%,#203a55 0%,#101d30 55%,#0b1422 100%)}
+#fc3dScene{width:100%;height:100%;display:block;cursor:grab}#fc3dScene:active{cursor:grabbing}.fc3d-overlay{position:absolute;pointer-events:none;background:#0a1422d9;border:1px solid #38516d;border-radius:8px;padding:9px 11px;font-size:10px;color:#bfd0e4;max-width:80%}.fc3d-overlay b{display:block;color:#fff;font-size:11px;margin-bottom:4px}.fc3d-overlay span{display:block}.fc3d-tl{left:12px;top:12px}.fc3d-tr{right:12px;top:12px;text-align:right}.fc3d-bl{left:12px;bottom:12px}
+.fc3d-side{display:flex;flex-direction:column;gap:12px}.fc3d-panel{background:#111c2e;border:1px solid #263852;border-radius:12px;padding:14px}.fc3d-panel-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:#dce8f7;margin-bottom:13px}
+.fc3d-panel label{display:flex;justify-content:space-between;color:#c5d5e8;font-size:11px;margin:10px 0 7px}.fc3d-panel output{color:#55d9e8;font-weight:800}.fc3d-panel input[type=range]{width:100%;accent-color:#55d9e8}
+.fc3d-buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:14px}.fc3d-buttons button{border:1px solid #344d69;border-radius:8px;padding:9px 7px;background:#172840;color:#e7f1ff;font-size:10px;font-weight:700}.fc3d-buttons button:hover{border-color:#55d9e8}.fc3d-buttons .fc3d-primary{background:#55d9e8;color:#071623;border-color:#55d9e8}.fc3d-wide{grid-column:1/-1}
+.fc3d-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.fc3d-metrics>div{background:#0c1727;border:1px solid #24364f;border-radius:9px;padding:11px}.fc3d-metrics small{display:block;color:#9eb0c9;font-size:9px;text-transform:uppercase}.fc3d-metrics strong{display:block;font-size:21px;margin-top:5px;color:#f0f6ff}.fc3d-state{display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px solid #24364a;font-size:10px;color:#c5d5e8}.fc3d-state b{color:#70e0ad;font-size:9px}.fc3d-state b.amber{color:#ffad62}.fc3d-note{font-size:10px;line-height:1.55;color:#9eb0c9;margin:10px 0 0}
+@media(max-width:1050px){.fc3d-grid{grid-template-columns:1fr}.fc3d-viewer{height:420px}}@media(max-width:560px){.fc3d-wrap{padding:11px}.fc3d-viewer{height:350px}.fc3d-head h2{font-size:17px}}
+
+/* Premium RehabGlove-inspired visual refresh — presentation layer only */
+:root{--bg:#0b1220;--panel:#111c2e;--ink:#eaf2ff;--muted:#9eb0c9;--line:#263852;--blue:#55d9e8;--teal:#70e0ad;--orange:#ffad62;--shadow:0 18px 45px rgba(0,0,0,.24)}
+body,.main{background:radial-gradient(ellipse at 50% 0%,#172b45 0%,#0b1220 62%);color:var(--ink)}
+.app{grid-template-columns:250px minmax(0,1fr)}
+.sidebar{background:rgba(8,17,31,.96);border-right:1px solid #24354d;gap:30px}
+.brand .logo{background:linear-gradient(135deg,#55d9e8,#3677c8);color:#061321;border-radius:13px;box-shadow:0 8px 24px #55d9e822}
+.nav button{border:1px solid transparent;transition:background .18s,border-color .18s,transform .18s}
+.nav button.active,.nav button:hover{background:linear-gradient(120deg,#172b43,#122239);border-color:#2b4663;color:#fff;box-shadow:inset 3px 0 #55d9e8}
+.side-bottom{background:linear-gradient(155deg,#142239f2,#0e1929f2);border-color:#263852}
+.main{padding:25px clamp(18px,2.6vw,38px)}
+.topbar{border-bottom:1px solid #24354d;padding:0 0 19px;margin-bottom:24px}
+.topbar h1{letter-spacing:-.45px}
+.connection{background:#0d192a;border-color:#2a3e57;color:#c6d5e8}
+.avatar{background:linear-gradient(135deg,#55d9e8,#4f83b5);color:#071623;border-radius:12px}
+.card,.exercise,.fc3d-wrap,.fc3d-panel{background:linear-gradient(155deg,#142239f5,#0e1929f5);border:1px solid #263852;border-radius:17px;box-shadow:0 18px 45px #0002}
+.card{padding:20px}
+.welcome{background:linear-gradient(120deg,#142239,#173b58);border:1px solid #2b4663;border-radius:18px;box-shadow:0 18px 42px #0002;padding:30px}
+.welcome:after{border-color:#55d9e822;box-shadow:0 0 0 28px #55d9e808,0 0 0 60px #55d9e805}
+.welcome h2{font-size:clamp(23px,2vw,30px);line-height:1.18;max-width:650px}
+.btn{border-radius:10px}.btn.primary{background:linear-gradient(135deg,#51d5e5,#4aa9c9);color:#071623;box-shadow:0 8px 20px #55d9e822}.btn.primary:hover{background:linear-gradient(135deg,#6be4ee,#55b9d6)}
+.btn.light{background:linear-gradient(135deg,#51d5e5,#4aa9c9);color:#071623}.btn.ghost,.btn.outline{background:#172840;color:#eaf2ff;border:1px solid #344d69}.btn.ghost:hover,.btn.outline:hover{border-color:#55d9e8}
+.stat-icon,.activity-icon{background:#142b43;color:#55d9e8;border:1px solid #263e58;border-radius:11px}
+.stat-value{color:#f3f8ff}.green{color:#70e0ad}.blue{color:#55d9e8}
+.activity-row{border-color:#24364a}.pill{background:#12372f;color:#70e0ad}.pill.amber{background:#3d2a1c;color:#ffad62}
+.progress-track{background:#263852}.progress-fill{background:linear-gradient(90deg,#55d9e8,#70e0ad)}
+.field label{color:#c5d5e8}.field input,.field select{background:#0c1727!important;border:1px solid #30435c!important;color:#eaf2ff!important}.field input:focus,.field select:focus{border-color:#55d9e8!important;box-shadow:0 0 0 3px #55d9e81a}
+.exercise{transition:transform .18s,border-color .18s,box-shadow .18s}.exercise:hover{border-color:#3a5b7a;transform:translateY(-2px)}.exercise.selected{background:linear-gradient(145deg,#142b43,#102034);border:1px solid #55d9e8;box-shadow:0 0 0 2px #55d9e818;padding:18px}
+.table td{border-color:#263852}.table th{background:#172840!important;color:#c7d7e9!important}.table tr:hover td{background:#142239}
+.fc3d-wrap{padding:20px;margin-bottom:20px;overflow:hidden}
+.fc3d-head{align-items:center;margin-bottom:18px;padding:1px 1px 15px;border-bottom:1px solid #263852}
+.fc3d-eyebrow{font-size:10px;letter-spacing:.17em;color:#55d9e8}
+.fc3d-head h2{font-size:clamp(20px,1.8vw,25px);letter-spacing:-.45px;margin:7px 0}
+.fc3d-head p{font-size:12px;line-height:1.6;color:#9eb0c9}
+.fc3d-status{padding:8px 11px;background:#12372f;border-color:#245346;color:#70e0ad;white-space:nowrap}
+.fc3d-grid{grid-template-columns:minmax(0,1.6fr) minmax(280px,.8fr);gap:16px;align-items:stretch}
+.fc3d-viewer{height:610px;border:1px solid #314966;border-radius:14px;background:radial-gradient(ellipse at 50% 43%,#294966 0%,#14243a 55%,#0b1422 100%);box-shadow:inset 0 0 70px #0002}
+#fc3dScene{outline:none}
+.fc3d-overlay{background:#091421d9;border:1px solid #38516d;border-radius:10px;padding:11px 13px;font-size:11px;backdrop-filter:blur(9px);box-shadow:0 8px 22px #0002}
+.fc3d-overlay b{font-size:12px;letter-spacing:.03em}.fc3d-bl{color:#c6d6e8}
+.fc3d-side{gap:14px}
+.fc3d-panel{padding:17px;border-radius:14px;box-shadow:none}
+.fc3d-panel-title{font-size:11px;letter-spacing:.13em;color:#dce8f7;padding-bottom:12px;border-bottom:1px solid #263852;margin-bottom:14px}
+.fc3d-panel label{font-size:12px;color:#c5d5e8;margin:12px 0 9px}.fc3d-panel output{color:#55d9e8;font-size:12px}
+.fc3d-panel input[type=range]{accent-color:#55d9e8;height:5px;cursor:pointer}
+.fc3d-buttons{gap:9px;margin-top:17px}.fc3d-buttons button{border-radius:10px;padding:11px 9px;background:#172840;border-color:#344d69;color:#e7f1ff;font-size:11px;transition:transform .16s,border-color .16s}.fc3d-buttons button:hover{border-color:#55d9e8;transform:translateY(-1px)}.fc3d-buttons .fc3d-primary{background:linear-gradient(135deg,#51d5e5,#4aa9c9);border-color:transparent;color:#071623}
+.fc3d-metrics{gap:10px}.fc3d-metrics>div{background:#0c1727;border:1px solid #24364f;border-radius:12px;padding:14px}.fc3d-metrics small{font-size:10px;letter-spacing:.06em;color:#9eb0c9}.fc3d-metrics strong{font-size:25px;color:#f3f8ff}.fc3d-state{padding:11px 0;border-color:#24364a;font-size:11px}.fc3d-state b{font-size:10px}.fc3d-note{font-size:11px;line-height:1.6}
+.angle-box,.mini-stat{background:#0c1727;border-color:#263852;color:#eaf2ff}.angle-number{color:#f3f8ff}.control-note{background:#3d2a1c;border-color:#61452b;color:#ffce9d}
+@media(max-width:1100px){.fc3d-grid{grid-template-columns:1fr}.fc3d-viewer{height:540px}}
+@media(max-width:1050px){.app{grid-template-columns:78px minmax(0,1fr)}}
+@media(max-width:600px){.fc3d-wrap{padding:12px}.fc3d-viewer{height:420px}.fc3d-head{align-items:flex-start}.fc3d-grid{grid-template-columns:minmax(0,1fr)}.fc3d-panel{padding:14px}.main{padding:18px 12px}.topbar{padding-bottom:14px}}
+
+
+/* Live workspace: 3D simulation and patient input stay side by side */
+@media(min-width:1101px){
+  .fc3d-grid{grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);align-items:start}
+  .fc3d-viewer{height:620px;min-height:620px}
+  .fc3d-side{min-width:0}
+  .fc3d-side .session-control-card{margin:0!important}
+  .session-layout{grid-template-columns:1fr;margin-top:16px}
+  .session-layout>.card:first-child{display:none}
+}
+@media(max-width:1100px){
+  .fc3d-grid{grid-template-columns:1fr}
+  .fc3d-viewer{height:460px;min-height:0}
+}
+@media(max-width:600px){
+  .fc3d-viewer{height:350px}
+}
+
+
+/* Final layout fix: keep the 3D model and live controls side by side on desktop. */
+@media (min-width: 761px){
+  #session .fc3d-grid{grid-template-columns:minmax(0,1.08fr) minmax(330px,.92fr)!important;gap:16px!important;align-items:start!important}
+  #session .fc3d-viewer{height:560px!important;min-height:560px!important}
+  #session .fc3d-side{min-width:0!important;display:flex!important;flex-direction:column!important;gap:14px!important}
+  #session .session-control-card{width:100%!important;margin:0!important}
+}
+@media (max-width:760px){
+  #session .fc3d-grid{grid-template-columns:minmax(0,1fr)!important}
+  #session .fc3d-viewer{height:380px!important;min-height:0!important}
+}
+</style>
+\n<style id="flexcare-human-theme">
+/* A calmer, clinic-inspired theme: restrained colour, flat surfaces, clear hierarchy. */
+:root{--bg:#f3f5f3;--panel:#ffffff;--ink:#24332f;--muted:#6f7e78;--line:#dce4df;--blue:#2f7b70;--blue2:#477f77;--teal:#4e8c78;--orange:#c58b4d;--red:#c85f5f;--navy:#24332f;--shadow:0 2px 8px rgba(30,52,43,.055)}
+html{background:#f3f5f3}
+body,.main{background:#f3f5f3!important;color:#24332f!important}
+.app{background:#f3f5f3}
+.sidebar{background:#fff!important;color:#24332f;border-right:1px solid #dce4df;box-shadow:none}
+.brand .logo{background:#e1eee8!important;color:#2f7b70!important;box-shadow:none!important;border-radius:9px}
+.brand b,.topbar h1,.card h2,.card h3,.section-head h3{color:#24332f!important}
+.brand small,.nav-label{color:#7c8983!important}
+.nav button{color:#53645c!important;border-radius:8px}
+.nav button.active,.nav button:hover{background:#edf4f0!important;border-color:#dce9e1!important;color:#245e52!important;box-shadow:inset 3px 0 #4b8a76!important}
+.side-bottom{background:#f5f8f6!important;border:1px solid #e0e7e2!important;box-shadow:none}
+.side-bottom small,.side-bottom p{color:#63746b!important}
+.topbar{border-color:#dce4df!important}
+.eyebrow,.fc3d-eyebrow{color:#3b8172!important;letter-spacing:1.25px}
+.connection{background:#fff!important;border-color:#dce4df!important;color:#53645c!important}
+.connection .dot{background:#4d9a78;box-shadow:0 0 0 4px #e8f3ec!important}
+.avatar{background:#e1eee8!important;color:#2f6e5d!important;box-shadow:none;border-radius:10px}
+.welcome{background:#e7f0eb!important;color:#24332f!important;border:1px solid #d8e6dd!important;border-radius:12px!important;box-shadow:none!important}
+.welcome:after{display:none}
+.welcome h2{color:#24332f!important}
+.welcome p{color:#536b60!important}
+.card,.exercise,.fc3d-wrap,.fc3d-panel{background:#fff!important;border:1px solid #dce4df!important;border-radius:12px!important;box-shadow:0 2px 8px rgba(30,52,43,.045)!important;backdrop-filter:none!important}
+.card{padding:19px}
+.stat-icon,.activity-icon{background:#edf4f0!important;color:#3b8172!important;border:1px solid #e0e9e3!important}
+.stat-value{color:#24332f!important}
+.stat-foot,.stat-top,.helper,.muted,.field small{color:#728078!important}
+.green{color:#3c866a!important}.blue{color:#3b8172!important}
+.pill{background:#e6f2ea!important;color:#3d755b!important}.pill.amber{background:#f7efe3!important;color:#9a6b30!important}
+.progress-track{background:#e5ebe7!important}.progress-fill{background:#4b8a76!important;box-shadow:none!important}
+.btn{border-radius:8px!important;box-shadow:none!important;font-weight:700}
+.btn.primary,.btn.light,.fc3d-buttons .fc3d-primary{background:#3f8172!important;border:1px solid #3f8172!important;color:#fff!important}
+.btn.primary:hover,.btn.light:hover,.fc3d-buttons .fc3d-primary:hover{background:#326d60!important}
+.btn.ghost,.btn.outline,.fc3d-buttons button{background:#fff!important;color:#3b5f54!important;border:1px solid #d2ded7!important}
+.btn.ghost:hover,.btn.outline:hover,.fc3d-buttons button:hover{background:#f3f7f4!important;border-color:#9dbeb0!important}
+.btn.danger{background:#fbefed!important;color:#a84f49!important}
+.field label{color:#53645c!important}
+.field input,.field select,input,select,textarea{background:#fff!important;color:#24332f!important;border-color:#d2ded7!important}
+.field input:focus,.field select:focus{border-color:#6b9f8d!important;box-shadow:0 0 0 3px #4b8a7615!important}
+.exercise{background:#fff!important}.exercise:hover{transform:translateY(-1px);border-color:#b9d0c4!important;box-shadow:0 4px 12px rgba(30,52,43,.07)!important}
+.exercise.selected{background:#edf5f0!important;border:1px solid #6b9f8d!important;box-shadow:none!important}
+.exercise .tag{color:#3b8172!important}
+.fc3d-wrap{padding:18px!important}
+.fc3d-head{border-color:#e2e8e4!important}
+.fc3d-status{background:#e7f2eb!important;border-color:#d0e5d8!important;color:#3f795d!important}
+.fc3d-status i{background:#4e9874!important}
+.fc3d-grid{grid-template-columns:minmax(0,1.45fr) minmax(280px,.85fr)!important;gap:16px!important;align-items:start}
+.fc3d-viewer{background:radial-gradient(ellipse at 50% 43%,#e5eee9 0%,#d5e2db 58%,#c8d8cf 100%)!important;border:1px solid #cbd9d0!important;border-radius:10px!important;box-shadow:none!important}
+.fc3d-overlay{background:rgba(255,255,255,.92)!important;border:1px solid #d0ded5!important;color:#52685d!important;box-shadow:none!important;backdrop-filter:none!important}
+.fc3d-overlay b{color:#2c4c40!important}
+.fc3d-panel{box-shadow:none!important}
+.fc3d-panel-title{color:#344f43!important;border-color:#e2e8e4!important}
+.fc3d-panel label{color:#53645c!important}.fc3d-panel output{color:#347969!important}
+.fc3d-panel input[type=range]{accent-color:#3f8172!important}
+.fc3d-metrics>div{background:#f5f8f6!important;border-color:#e0e7e2!important}
+.fc3d-metrics small,.fc3d-note{color:#728078!important}.fc3d-metrics strong{color:#24332f!important}
+.fc3d-state{border-color:#e2e8e4!important;color:#53645c!important}.fc3d-state b{color:#3f795d!important}.fc3d-state b.amber{color:#a77536!important}
+.angle-box,.mini-stat{background:#f5f8f6!important;border-color:#e0e7e2!important;color:#24332f!important}
+.angle-number{color:#24332f!important}.angle-number span,.angle-label,.angle-note{color:#728078!important}
+.hand-stage{background:radial-gradient(ellipse at 50% 43%,#e5eee9 0%,#d5e2db 58%,#c8d8cf 100%)!important;border-color:#cbd9d0!important}
+.hand-stage:after{display:none}
+.control-note{background:#f7f1e6!important;border-color:#eadcc3!important;color:#876a3c!important}
+#coachMessage{background:#edf4f0!important;border-color:#d9e6dd!important;color:#365f51!important}
+.table-wrap,table,.table{background:#fff!important;color:#24332f!important}.table th{background:#f2f6f3!important;color:#62736a!important}.table td{border-color:#e2e8e4!important}.table tr:hover td{background:#f7faf8!important}
+.toast{background:#243b32!important;box-shadow:0 4px 14px rgba(30,52,43,.12)!important}
+.footer-note{color:#8a9790!important}
+@media(max-width:1100px){.fc3d-grid{grid-template-columns:1fr!important}.fc3d-viewer{height:500px}}
+@media(max-width:600px){.welcome{padding:20px!important}.fc3d-viewer{height:380px}.card{padding:15px}}
+
+.report-chart{height:230px;background:#fbfdfb!important;border-color:#e2e8e4!important;padding:8px}.report-chart svg{width:100%;height:100%}.report-chart text{font-family:Inter,system-ui,sans-serif}
+</style>
+
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">✳</div><div class="brand-text"><b>FlexCare</b><small>REHAB SYSTEM</small></div></div>
+  <div class="nav-label">WORKSPACE</div>
+  <nav class="nav">
+    <button class="active" data-page="overview"><span class="ico">▦</span><span class="nav-text">Overview</span></button>
+    <button data-page="patient"><span class="ico">♙</span><span class="nav-text">Patient profile</span></button>
+    <button data-page="exercise"><span class="ico">✳</span><span class="nav-text">Exercise setup</span></button>
+    <button data-page="session"><span class="ico">⌁</span><span class="nav-text">Live session</span></button>
+    <button data-page="reports"><span class="ico">▤</span><span class="nav-text">Session reports</span></button>
+  </nav>
+  <div class="side-bottom"><small>PROTOTYPE MODE</small><p>Sensor readings are simulated for demonstration. Hardware connection can be added later.</p></div>
+</aside>
+<main class="main">
+  <header class="topbar"><div><div class="eyebrow">HAND REHABILITATION · MDP</div><h1 id="pageTitle">Rehabilitation overview</h1></div><div class="top-actions"><div class="connection"><span class="dot" id="connectionDot"></span><span id="connectionText">Demo mode · Not connected</span></div><div class="avatar" id="avatar">PT</div></div></header>
+  <section class="page active" id="overview">
+    <div class="welcome"><div><div class="eyebrow" style="color:#b9d9e8">MOVEMENT, MEASURED</div><h2 id="welcomeTitle">Turn movement into measurable progress.</h2><p>A connected rehabilitation concept with guided exercises, live angle feedback, simulated tendon assistance, and progress insights in one bright workspace.</p></div><button class="btn light" onclick="go('patient')">Set up patient →</button></div>
+    <div class="grid stats">
+      <div class="card"><div class="stat-top">Patient <span class="stat-icon">♙</span></div><div class="stat-value" id="overviewPatient">Not set</div><div class="stat-foot">Active profile</div></div>
+      <div class="card"><div class="stat-top">Target angle <span class="stat-icon">⌁</span></div><div class="stat-value" id="overviewTarget">45°</div><div class="stat-foot">Adjustable per exercise</div></div>
+      <div class="card"><div class="stat-top">Sessions done <span class="stat-icon">◷</span></div><div class="stat-value" id="overviewSessions">0</div><div class="stat-foot">In this demo</div></div>
+      <div class="card"><div class="stat-top">Last progress <span class="stat-icon">↗</span></div><div class="stat-value green" id="overviewProgress">—</div><div class="stat-foot">Target angle reached</div></div>
+    </div>
+    <div class="section-head"><div><h3>Start a session</h3><p>Move through the workflow as you would during a real rehabilitation session.</p></div></div>
+    <div class="grid two-col">
+      <div class="card"><div class="section-head" style="margin-top:0"><h3>Session workflow</h3><span class="pill amber">5 steps</span></div>
+        <div class="activity-row"><div class="activity-icon">♙</div><div><b>01 · Patient profile</b><small>Set patient details and affected hand.</small></div><button class="btn ghost" onclick="go('patient')">Open</button></div>
+        <div class="activity-row"><div class="activity-icon">✳</div><div><b>02 · Choose an exercise</b><small>Select a movement and prescribed target.</small></div><button class="btn ghost" onclick="go('exercise')">Open</button></div>
+        <div class="activity-row"><div class="activity-icon">⌁</div><div><b>03 · Measure movement</b><small>View simulated flex-sensor angle in real time.</small><button style="display:none"></button></div><button class="btn ghost" onclick="go('session')">Open</button></div>
+        <div class="activity-row"><div class="activity-icon">↗</div><div><b>04 · Assistance feedback</b><small>Calculate remaining angle for the servo-assist concept.</small></div><span class="pill">Feedback</span></div>
+        <div class="activity-row"><div class="activity-icon">▤</div><div><b>05 · Review report</b><small>Review range, repetitions, and session summary.</small></div><button class="btn ghost" onclick="go('reports')">Open</button></div>
+      </div>
+      <div class="card"><div class="section-head" style="margin-top:0"><h3>System status</h3></div>
+        <div class="activity-row"><div class="activity-icon">⌨</div><div><b>Software dashboard</b><small>HTML · CSS · JavaScript</small></div><span class="pill">Ready</span></div>
+        <div class="activity-row"><div class="activity-icon">⌁</div><div><b>Flex sensor / Arduino</b><small id="sensorStatus">Simulated angle input</small></div><span class="pill amber" id="sensorPill">Demo</span></div>
+        <div class="activity-row"><div class="activity-icon">⚙</div><div><b>Servo assistance</b><small>Feedback value calculated in software</small></div><span class="pill">Preview</span></div>
+        <div style="margin-top:18px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:8px"><b>Demo readiness</b><b class="blue">100%</b></div><div class="progress-track"><div class="progress-fill" style="width:100%"></div></div></div>
+        <p class="helper" style="margin-top:14px">This is a front-end working model, not a medical device. Do not connect a motor to a person based on the demo output.</p>
+      </div>
+    </div>
+  </section>
+  <section class="page" id="patient">
+    <div class="card"><div class="section-head" style="margin-top:0"><div><h3>Patient profile</h3><p>Enter demo details to personalise the session screen.</p></div><span class="pill">Step 1 of 4</span></div>
+      <div class="form-grid">
+        <div class="field"><label for="patientName">PATIENT NAME / ID</label><input id="patientName" placeholder="e.g. Patient 001" value="Patient 001"></div>
+        <div class="field"><label for="patientAge">AGE</label><input id="patientAge" type="number" min="1" max="120" placeholder="e.g. 45" value="45"></div>
+        <div class="field"><label for="affectedHand">AFFECTED HAND</label><select id="affectedHand"><option>Right hand</option><option>Left hand</option><option>Both hands</option></select></div>
+        <div class="field"><label for="condition">REHABILITATION GOAL</label><select id="condition"><option>Finger mobility</option><option>Post-injury rehabilitation</option><option>Post-stroke hand exercises</option><option>Range-of-motion training</option><option>Other / demonstration</option></select></div>
+        <div class="field"><label for="therapist">THERAPIST / SUPERVISOR</label><input id="therapist" placeholder="Name (optional)"></div>
+        <div class="field"><label for="sessionDate">SESSION DATE</label><input id="sessionDate" type="date"></div>
+        <div class="field full"><p class="helper">For a real patient, exercise targets and assistance must be prescribed by a qualified clinician. Use fictional details for your project demonstration.</p></div>
+      </div>
+      <div class="controls"><button class="btn primary" onclick="savePatient()">Save profile & continue →</button><button class="btn outline" onclick="go('overview')">Back to overview</button></div>
+    </div>
+  </section>
+  <section class="page" id="exercise">
+    <div class="section-head" style="margin-top:0"><div><h3>Choose a rehabilitation exercise</h3><p>Pick a movement, then set the target angle and repetitions for this demo.</p></div><span class="pill">Step 2 of 4</span></div>
+    <div class="grid exercise-grid" id="exerciseGrid">
+      <div class="exercise selected" data-ex="Finger flexion" data-target="45" onclick="chooseExercise(this)"><span class="tag">SELECTED</span><div class="ex-icon">✊</div><b>Finger flexion</b><p>Gradually bend the fingers toward the palm.</p><small>Target range: 0–45°</small></div>
+      <div class="exercise" data-ex="Finger extension" data-target="15" onclick="chooseExercise(this)"><div class="ex-icon">🖐</div><b>Finger extension</b><p>Practice returning fingers toward an open-hand position.</p><small>Target range: 0–15°</small></div>
+      <div class="exercise" data-ex="Gentle grip" data-target="60" onclick="chooseExercise(this)"><div class="ex-icon">◉</div><b>Gentle grip</b><p>Practice a controlled partial curl.</p><small>Target range: 0–60°</small></div>
+    </div>
+    <div class="grid two-col" style="margin-top:16px">
+      <div class="card"><h3 style="margin-top:0">Session prescription</h3><div class="field"><label for="targetRange">TARGET ANGLE</label><div class="target-control"><input type="range" id="targetRange" min="5" max="90" value="45" oninput="updateTarget(this.value)"><strong id="targetLabel">45°</strong></div></div>
+        <div class="field" style="margin-top:18px"><label for="repGoal">REPETITION GOAL</label><select id="repGoal"><option value="3">3 repetitions · quick demo</option><option value="5" selected>5 repetitions · standard demo</option><option value="10">10 repetitions · extended demo</option></select></div>
+        <div class="control-note">Demo logic: <b>remaining angle = target angle − measured angle</b>. A real controller should use calibrated sensor data, safe limits, clinician-approved settings, and continuous feedback—not a one-time motor command.</div>
+        <div class="controls"><button class="btn primary" onclick="startSession()">Confirm exercise & open live session →</button></div>
+      </div>
+      <div class="card"><h3 style="margin-top:0">What the system will show</h3>
+        <div class="activity-row"><div class="activity-icon">◉</div><div><b>Measured angle</b><small>Flex sensor estimates finger bend.</small></div></div>
+        <div class="activity-row"><div class="activity-icon">◎</div><div><b>Target angle</b><small>Chosen movement goal for this demo.</small></div></div>
+        <div class="activity-row"><div class="activity-icon">↗</div><div><b>Assistance gap</b><small>Difference between target and measured angle.</small></div></div>
+        <div class="activity-row"><div class="activity-icon">⚙</div><div><b>Servo command preview</b><small>Visual concept only; not sent to hardware.</small></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="page" id="session">
+
+    <div class="card" style="margin-bottom:16px;border-color:#2b5870;background:linear-gradient(120deg,#11253a,#102033)">
+      <div class="eyebrow">LIVE SESSION · THREE-STEP MOVEMENT</div>
+      <h2 style="margin:7px 0 6px">Patient attempt → record → assist remaining angle</h2>
+      <p class="helper" style="font-size:12px;margin:0 0 13px">Set the target in Exercise setup. Move the patient-attempt angle and the 3D model follows automatically. Click <b>Record my attempt</b> once, then click <b>Assist remaining angle</b> to animate the remaining movement. Use <b>Next repetition</b> to open the fingers and repeat.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="pill" style="margin:0;background:#173b4a;color:#80e6f2">① Voluntary angle</span><span class="pill" style="margin:0;background:#24334a;color:#d0dcf1">② Remaining = target − attempt</span><span class="pill" style="margin:0;background:#12372f;color:#70e0ad">③ Simulated assistance</span></div>
+    </div>
+    <div class="fc3d-wrap">
+      <div class="fc3d-head"><div><div class="fc3d-eyebrow">MECHANICAL ASSEMBLY · INTERACTIVE MODEL</div><h2>3D rehabilitation glove simulator</h2><p>Drag to orbit · Scroll to zoom · Automatically follows the patient attempt and assisted movement</p></div><span class="fc3d-status"><i></i> LOCAL SIMULATION</span></div>
+      <div class="fc3d-grid">
+        <section class="fc3d-viewer"><canvas id="fc3dScene" aria-label="Interactive 3D rehabilitation glove model"></canvas>
+          <div class="fc3d-overlay fc3d-tl"><b>ACTUATED HAND</b><span>Finger linkages · tendon paths · wrist actuator</span></div>
+          <div class="fc3d-overlay fc3d-tr"><b id="fc3dAngleRead">FLEXION 35°</b><span>Assisted movement preview</span></div>
+          <div class="fc3d-overlay fc3d-bl">CONCEPT MODEL · NOT CONNECTED TO HARDWARE</div>
+        </section>
+        <aside class="fc3d-side">
+          <div class="fc3d-panel"><div class="fc3d-panel-title">Simulated telemetry</div>
+            <div class="fc3d-metrics"><div><small>Finger angle</small><strong id="fc3dMetricAngle">35°</strong></div><div><small>Assist output</small><strong id="fc3dMetricAssist">65%</strong></div></div>
+            <div class="fc3d-state"><span>Servo / drive unit</span><b id="fc3dServoState">HOLDING</b></div>
+            <div class="fc3d-state"><span>Joint tracking</span><b>SIMULATED</b></div><div class="fc3d-state"><span>Movement limit</span><b class="amber">85° MAX</b></div>
+            <p class="fc3d-note">This is the only hand simulation used in Live Session. It follows the patient-attempt angle immediately, then animates the remaining angle after you select Assist remaining angle.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div class="grid session-layout">
+      <div class="card">
+        <div class="session-header"><div><h2 id="sessionExercise">Finger flexion</h2><p id="sessionSub">Patient 001 · Right hand · Demo sensor</p></div><div class="live-badge" id="liveBadge"><span class="dot"></span><span id="liveStatus">READY TO START</span></div></div>
+        <div class="angle-stage">
+          <div class="angle-box"><div class="angle-label" id="measuredAngleLabel">VOLUNTARY ATTEMPT</div><div class="angle-number"><span id="currentAngle">0</span><span>°</span></div><div class="angle-note">Flex sensor reading · simulated</div></div>
+          <div class="angle-box"><div class="angle-label">REMAINING ANGLE</div><div class="angle-number blue"><span id="remainingAngle">45</span><span>°</span></div><div class="angle-note">Target − measured, clamped at 0°</div></div>
+        </div>
+        <div class="stage-caption" id="handCaption" style="margin:12px 0;padding:12px 14px;border:1px solid #29445e;border-radius:12px;background:#101d30;color:#c5d8eb">Ready for patient attempt. The 3D simulator above will follow the angle automatically.</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:11px"><b>Target completion</b><b class="blue" id="progressLabel">0%</b></div><div class="progress-track"><div class="progress-fill" id="sessionProgress"></div></div>
+        <div class="field" style="margin-top:18px"><label for="manualAngle">STEP 1 · PATIENT’S VOLUNTARY ATTEMPT</label><div class="target-control"><input type="range" id="manualAngle" min="0" max="90" value="0" oninput="manualInput(this.value)"><strong id="manualLabel">0°</strong></div><div class="helper">Move this slider to the angle the patient achieves independently. The 3D simulation follows immediately. Then click “Record my attempt” once to lock that angle for this repetition.</div></div>
+        <div class="controls"><button class="btn ghost" id="recordAttemptBtn" onclick="recordAttempt()">STEP 2 · Record my attempt</button><button class="btn primary" id="assistBtn" onclick="assistRemaining()" disabled>STEP 3 · Assist remaining angle</button><button class="btn ghost" id="nextAttemptBtn" onclick="nextAttempt()" disabled>↻ Next repetition</button><button class="btn outline" onclick="resetSession()">↺ Reset</button><button class="btn danger" onclick="stopSession()">■ Stop & save</button></div>
+        <div class="control-note" id="assistNote">Servo assistance preview: waiting for sensor input. The calculated gap is illustrative and is not a safe motor command.</div><div id="coachMessage" style="margin-top:10px;padding:12px 14px;border-radius:13px;background:#f1f6fa;border:1px solid #dce7ef;color:#234e70;font-size:12px;font-weight:750">✦ Coach insight: start the session, then move the slider to explore the feedback loop.</div>
+      </div>
+      <div class="grid" style="gap:15px">
+        <div class="card"><div class="section-head" style="margin-top:0"><h3>Session metrics</h3><span class="pill amber">Simulated</span></div><div class="mini-stats"><div class="mini-stat"><b id="repCount">0/5</b><small>Repetitions</small></div><div class="mini-stat"><b id="maxAngle">0°</b><small>Peak angle</small></div><div class="mini-stat"><b id="completionMetric">0%</b><small>Target reached</small></div></div></div>
+        <div class="card"><div class="section-head" style="margin-top:0"><h3>Independent attempt trend</h3><span class="helper">Voluntary angle per repetition</span></div><div id="attemptTrend" style="display:flex;align-items:flex-end;gap:8px;height:64px;padding:4px 2px 0"><span class="helper">Attempts will appear here after recording.</span></div><div class="helper" id="trendSummary" style="margin-top:9px">No attempts recorded yet.</div></div><div class="card"><div class="section-head" style="margin-top:0"><h3>Angle over time</h3><span class="helper">Sensor + assistance</span></div><div class="chart"><svg id="angleChart" viewBox="0 0 320 150" preserveAspectRatio="none"><line x1="15" y1="120" x2="310" y2="120" stroke="#e8edf5"/><line x1="15" y1="75" x2="310" y2="75" stroke="#e8edf5" stroke-dasharray="3 4"/><line x1="15" y1="30" x2="310" y2="30" stroke="#e8edf5" stroke-dasharray="3 4"/><text x="15" y="142" font-size="9" fill="#8793a8">Waiting for readings</text></svg></div><div class="helper">The graph records each independent attempt, so changes across repetitions can be reviewed.</div></div>
+        <div class="card"><h3 style="margin-top:0">Feedback loop</h3><div class="activity-row"><div class="activity-icon">①</div><div><b>Patient attempt</b><small>One voluntary movement is recorded</small></div></div><div class="activity-row"><div class="activity-icon">②</div><div><b>Calculate gap</b><small>Target angle − voluntary angle</small></div></div><div class="activity-row"><div class="activity-icon">③</div><div><b>Tendon assistance</b><small>Servo concept completes remaining gap</small></div></div><p class="helper">In the final prototype, Arduino firmware and a mechanically safe control loop would handle the physical servo. This page only demonstrates the software workflow.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="page" id="reports">
+    <div class="grid stats">
+      <div class="card"><div class="stat-top">Saved sessions <span class="stat-icon">▤</span></div><div class="stat-value" id="reportSessions">0</div><div class="stat-foot">Completed / stopped sessions</div></div>
+      <div class="card"><div class="stat-top">Average target completion <span class="stat-icon">↗</span></div><div class="stat-value" id="reportAverage">—</div><div class="stat-foot">Across saved demo sessions</div></div>
+      <div class="card"><div class="stat-top">Latest peak angle <span class="stat-icon">⌁</span></div><div class="stat-value" id="reportPeak">—</div><div class="stat-foot">Highest simulated reading</div></div>
+      <div class="card"><div class="stat-top">Current exercise <span class="stat-icon">✳</span></div><div class="stat-value" style="font-size:18px;margin-top:20px" id="reportExercise">Finger flexion</div><div class="stat-foot">Selected movement</div></div>
+    </div>
+    <div class="grid two-col" style="margin-top:17px">
+      <div class="card"><div class="section-head" style="margin-top:0"><div><h3>Recovery progress</h3><p>Peak voluntary angle across saved sessions</p></div><span class="pill">Trend</span></div><div class="chart report-chart"><svg id="reportAngleChart" viewBox="0 0 500 210" preserveAspectRatio="none"><text x="18" y="105" font-size="12" fill="#728078">Save sessions to build a progress trend</text></svg></div><p class="helper">Compare independent movement across sessions. Higher angles indicate a larger measured range in this demo.</p></div>
+      <div class="card"><div class="section-head" style="margin-top:0"><div><h3>Target completion</h3><p>Percentage of target angle reached per session</p></div><span class="pill">Session comparison</span></div><div class="chart report-chart"><svg id="reportCompletionChart" viewBox="0 0 500 210" preserveAspectRatio="none"><text x="18" y="105" font-size="12" fill="#728078">No saved reports yet</text></svg></div><p class="helper">Completion is calculated from peak measured angle ÷ target angle, capped at 100%.</p></div>
+    </div>
+    <div class="card" style="margin-top:17px"><div class="section-head" style="margin-top:0"><div><h3>Repetition performance</h3><p>Voluntary attempt angle recorded for each repetition in the latest session</p></div></div><div class="chart report-chart"><svg id="reportRepChart" viewBox="0 0 700 210" preserveAspectRatio="none"><text x="18" y="105" font-size="12" fill="#728078">Complete repetitions in a live session to see this chart</text></svg></div></div>
+    <div class="card" style="margin-top:17px"><div class="section-head" style="margin-top:0"><div><h3>Session history</h3><p>Each saved record is created by this browser demo.</p></div><button class="btn outline" onclick="exportReport()">↓ Export CSV</button></div>
+      <div style="overflow-x:auto"><table class="table"><thead><tr><th>Date & time</th><th>Patient</th><th>Exercise</th><th>Target</th><th>Peak angle</th><th>Reps</th><th>Completion</th></tr></thead><tbody id="historyBody"><tr><td colspan="7" class="empty">No sessions saved yet. Start a live session and stop it to create a report.</td></tr></tbody></table></div>
+    </div>
+    <div class="card" style="margin-top:17px"><h3 style="margin-top:0">How to present this model</h3><ol class="helper" style="line-height:2"><li>Save a sample patient profile.</li><li>Choose an exercise and target angle.</li><li>Open Live Session and start it.</li><li>Enter the patient’s voluntary angle and watch the 3D model follow automatically; record it, assist the gap, then continue to the next repetition.</li><li>Log repetitions, stop the session, and show the report / CSV export.</li></ol></div>
+  </section>
+  <div class="footer-note">FLEXCARE · MDP INTERACTIVE PROTOTYPE · SIMULATION ONLY</div>
+</main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const titles={overview:"Rehabilitation overview",patient:"Patient profile",exercise:"Exercise setup",session:"Live rehabilitation session",reports:"Session reports"};
+let patient={name:"Patient 001",age:45,hand:"Right hand",goal:"Finger mobility",therapist:"",date:""};
+let exercise="Finger flexion",target=45,repGoal=5,reps=0,current=0,maxAngle=0,running=false,sessionStarted=false,history=loadHistory(),readings=[],sessionStart=null;
+const $=id=>document.getElementById(id);
+function loadHistory(){try{return JSON.parse(localStorage.getItem('flexcare_progress_reports_v1')||'[]')}catch(e){return []}}
+function persistHistory(){try{localStorage.setItem('flexcare_progress_reports_v1',JSON.stringify(history))}catch(e){toast('Could not persist reports in this browser session')}}
+
+function go(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===page));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));$('pageTitle').textContent=titles[page];if(page==='session')refreshSession();if(page==='reports')renderReports();window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
+function toast(msg){let t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
+function savePatient(){patient={name:$('patientName').value.trim()||'Patient 001',age:$('patientAge').value||'—',hand:$('affectedHand').value,goal:$('condition').value,therapist:$('therapist').value.trim(),date:$('sessionDate').value};$('overviewPatient').textContent=patient.name;$('avatar').textContent=patient.name.split(/\s+/).map(x=>x[0]).join('').slice(0,2).toUpperCase();$('welcomeTitle').textContent='Welcome, '+patient.name+'.';toast('Patient profile saved');go('exercise');}
+function chooseExercise(el){document.querySelectorAll('.exercise').forEach(e=>{e.classList.remove('selected');e.querySelector('.tag')?.remove()});el.classList.add('selected');let tag=document.createElement('span');tag.className='tag';tag.textContent='SELECTED';el.appendChild(tag);exercise=el.dataset.ex;target=Number(el.dataset.target);$('targetRange').value=target;$('targetLabel').textContent=target+'°';$('overviewTarget').textContent=target+'°';$('reportExercise').textContent=exercise;}
+function updateTarget(v){target=Number(v);$('targetLabel').textContent=target+'°';$('overviewTarget').textContent=target+'°';$('remainingAngle').textContent=Math.max(0,target-current);updateProgress();}
+function startSession(){repGoal=Number($('repGoal').value);$('overviewTarget').textContent=target+'°';go('session');refreshSession();toast('Exercise set: '+exercise);}
+function refreshSession(){$('sessionExercise').textContent=exercise;$('sessionSub').textContent=patient.name+' · '+patient.hand+' · Demo sensor';$('repCount').textContent=reps+'/'+repGoal;$('overviewTarget').textContent=target+'°';$('manualAngle').max=Math.max(90,target);updateMetrics();updateProgress();}
+function toggleSession(start){
+  // Kept as a compatibility shim; the live session now starts automatically on the first angle input.
+  if(start){sessionStarted=true;running=true;sessionStart=sessionStart||new Date();$('liveBadge').classList.add('running');$('liveStatus').textContent='READY FOR ONE ATTEMPT';}
+  else {running=false;$('liveBadge').classList.remove('running');$('liveStatus').textContent='PAUSED';}
+}
+let attemptRecorded=false, assistDone=false, voluntaryAngle=null, attemptHistory=[];
+function manualInput(v){
+  if(attemptRecorded){$('manualAngle').value=voluntaryAngle;return}
+  current=Number(v);
+  // The live session begins as soon as an angle is entered; no motion-cycle button is needed.
+  sessionStarted=true;running=true;sessionStart=sessionStart||new Date();
+  $('liveBadge').classList.add('running');$('liveStatus').textContent='PATIENT ATTEMPT IN PROGRESS';
+  $('manualLabel').textContent=current+'°';
+  $('currentAngle').textContent=current;
+  $('remainingAngle').textContent=Math.max(0,target-current);
+  maxAngle=Math.max(maxAngle,current);
+  $('handCaption').textContent='3D simulation following patient attempt: '+current+'°';
+  $('measuredAngleLabel').textContent='VOLUNTARY ATTEMPT';
+  if(window.flexcare3DSetAngle) window.flexcare3DSetAngle(current,'voluntary');
+  $('recordAttemptBtn').disabled=false;
+  $('coachMessage').textContent='Patient attempt: '+current+'°. The 3D fingers are moving to this angle automatically. Record once when the attempt is complete.';
+  $('assistNote').innerHTML='<b>Patient attempt:</b> <b>'+current+'°</b>. Remaining angle preview: <b>'+Math.max(0,target-current)+'°</b>. Click Record my attempt to lock this reading.';
+  updateMetrics();updateProgress();drawChart();
+}
+function recordAttempt(){
+  if(!sessionStarted){sessionStarted=true;running=true;sessionStart=sessionStart||new Date()}
+  if(attemptRecorded){toast('One attempt is already recorded for this repetition');return}
+  voluntaryAngle=current;
+  attemptRecorded=true;
+  assistDone=false;
+  attemptHistory.push({rep:reps+1,angle:voluntaryAngle});
+  readings.push(voluntaryAngle);
+  if(readings.length>24)readings.shift();
+  $('manualAngle').disabled=true;
+  $('recordAttemptBtn').disabled=true;
+  $('assistBtn').disabled=false;
+  $('liveStatus').textContent='ATTEMPT RECORDED';
+  $('handCaption').textContent='Independent attempt recorded: '+voluntaryAngle+'°';
+  $('measuredAngleLabel').textContent='RECORDED VOLUNTARY ANGLE';
+  if(window.flexcare3DSetAngle) window.flexcare3DSetAngle(voluntaryAngle,'recorded');
+  $('coachMessage').textContent='✓ Attempt locked at '+voluntaryAngle+'°. The recorded value will be used for progress tracking.';
+  $('assistNote').innerHTML='<b>Step 2 — recorded result:</b> voluntary angle = '+voluntaryAngle+'°. The servo/tendon stage can now assist the remaining <b>'+Math.max(0,target-voluntaryAngle)+'°</b> in this simulation.';
+  renderAttemptTrend();updateMetrics();updateProgress();drawChart();
+  toast('Voluntary attempt recorded');
+}
+function assistRemaining(){
+  if(!attemptRecorded){toast('Record the patient’s attempt first');return}
+  if(assistDone){toast('Assistance already completed for this repetition');return}
+  const gap=Math.max(0,target-voluntaryAngle);
+  const startAngle=voluntaryAngle,finalTarget=target;
+  $('currentAngle').textContent=voluntaryAngle;
+  $('remainingAngle').textContent=gap;
+  $('measuredAngleLabel').textContent='VOLUNTARY ANGLE (RECORDED)';
+  $('handCaption').textContent=gap===0?'Target reached independently at '+voluntaryAngle+'°':'Assistance moving fingers '+startAngle+'° → '+finalTarget+'°';
+  $('coachMessage').textContent=gap===0?'No assistance needed: the patient reached the target independently.':'Assistance started: the 3D fingers will move from '+startAngle+'° to '+finalTarget+'° ('+gap+'° further).';
+  $('assistNote').innerHTML='<b>Assisted completion:</b> '+finalTarget+'° target − '+startAngle+'° voluntary angle = <b>'+gap+'° remaining</b>. The same 3D model is animating through the remaining angle. This is a software simulation, not a command to real hardware.';
+  $('assistBtn').disabled=true;
+  $('nextAttemptBtn').disabled=true;
+  if(window.flexcare3DSetAngle) window.flexcare3DSetAngle(finalTarget,'assisting');
+  const startTime=performance.now(),duration=gap===0?0:1200;
+  function animateAssistance(now){
+    const t=duration===0?1:Math.min(1,(now-startTime)/duration);
+    const shown=Math.round(startAngle+(finalTarget-startAngle)*(1-Math.pow(1-t,3)));
+    $('handCaption').textContent=gap===0?'Target reached independently at '+finalTarget+'°':'Assisted movement: '+shown+'° / '+finalTarget+'°';
+    if(t<1) requestAnimationFrame(animateAssistance);
+    else {
+      assistDone=true;
+      current=finalTarget;
+      reps=Math.min(repGoal,reps+1);
+      $('repCount').textContent=reps+'/'+repGoal;
+      $('liveStatus').textContent=reps>=repGoal?'GOAL REACHED':'REPETITION COMPLETE';
+      $('nextAttemptBtn').disabled=reps>=repGoal;
+      $('handCaption').textContent=gap===0?'Patient reached target independently':'Assisted target reached: '+finalTarget+'°';
+      $('coachMessage').textContent=gap===0?'No assistance was required.':'Complete: voluntary '+startAngle+'° + assistance '+gap+'° = target '+finalTarget+'°.';
+      $('liveBadge').classList.add('running');
+      updateMetrics();updateProgress();renderAttemptTrend();drawChart();
+      toast('Assisted repetition completed');
+    }
+  }
+  requestAnimationFrame(animateAssistance);
+}
+function nextAttempt(){
+  if(!assistDone){toast('Finish assistance for this repetition first');return}
+  if(reps>=repGoal){toast('Repetition goal reached');return}
+  attemptRecorded=false;assistDone=false;voluntaryAngle=null;current=0;
+  if(window.flexcare3DSetAngle) window.flexcare3DSetAngle(0,'opening');
+  $('measuredAngleLabel').textContent='VOLUNTARY ATTEMPT';
+  $('manualAngle').disabled=false;$('manualAngle').value=0;$('manualLabel').textContent='0°';
+  $('currentAngle').textContent='0';$('remainingAngle').textContent=target;
+  $('recordAttemptBtn').disabled=false;$('assistBtn').disabled=true;$('nextAttemptBtn').disabled=true;
+  $('liveStatus').textContent='READY FOR NEXT ATTEMPT';$('handCaption').textContent='Fingers opened and extended. Set the next independent attempt.';
+  $('coachMessage').textContent='✦ Next repetition: record one independent attempt. The trend keeps the previous readings for comparison.';
+  $('assistNote').innerHTML=' <b>Next repetition:</b> the patient gets one independent attempt. The new angle will be added to the trend before assistance.';
+  updateMetrics();updateProgress();toast('Ready for repetition '+(reps+1));
+}
+function renderAttemptTrend(){
+  const el=$('attemptTrend'); if(!el)return;
+  if(!attemptHistory.length){el.innerHTML='<span class="helper">Attempts will appear here after recording.</span>';$('trendSummary').textContent='No attempts recorded yet.';return}
+  const max=Math.max(target,...attemptHistory.map(x=>x.angle),1);
+  el.innerHTML=attemptHistory.slice(-8).map((a,i,arr)=>{
+    const height=Math.max(5,a.angle/max*48);
+    const last=i===arr.length-1;
+    return `<div title="Rep ${a.rep}: ${a.angle}°" style="flex:1;min-width:15px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:62px;gap:4px"><span style="font-size:9px;font-weight:800;color:${last?'#4f46e5':'#687793'}">${a.angle}°</span><div style="width:100%;max-width:28px;height:${height}px;border-radius:6px 6px 2px 2px;background:${last?'linear-gradient(180deg,#818cf8,#4f46e5)':'linear-gradient(180deg,#5eead4,#0d9488)'}"></div><span style="font-size:9px;color:#687793">R${a.rep}</span></div>`;
+  }).join('');
+  const first=attemptHistory[0].angle,last=attemptHistory[attemptHistory.length-1].angle,diff=last-first;
+  $('trendSummary').textContent=attemptHistory.length+' independent attempt(s) recorded · '+(diff>0?'Improved by '+diff+'° since first attempt.':diff<0?'Decreased by '+Math.abs(diff)+'° since first attempt.':'No change from first recorded attempt yet.');
+}
+function updateMetrics(){$('maxAngle').textContent=maxAngle+'°';$('repCount').textContent=reps+'/'+repGoal;$('completionMetric').textContent=Math.round(Math.min(100,current/Math.max(1,target)*100))+'%';$('reportPeak').textContent=history.length?Math.max(...history.map(x=>x.peak))+'°':'—';}
+function updateProgress(){let pct=Math.round(Math.min(100,current/Math.max(1,target)*100));$('sessionProgress').style.width=pct+'%';$('progressLabel').textContent=pct+'%';$('completionMetric').textContent=pct+'%';}
+function completeRep(){if(!attemptRecorded){toast('Record the patient’s one attempt first');return}if(!assistDone){toast('Complete the tendon-assistance step first');return}toast('This repetition is already logged automatically');}
+function resetSession(){running=false;sessionStarted=false;current=0;if(window.flexcare3DSetAngle)window.flexcare3DSetAngle(0,'ready');$('measuredAngleLabel').textContent='VOLUNTARY ATTEMPT';maxAngle=0;reps=0;readings=[];attemptHistory=[];attemptRecorded=false;assistDone=false;voluntaryAngle=null;sessionStart=null;$('manualAngle').disabled=false;$('recordAttemptBtn').disabled=false;$('assistBtn').disabled=true;$('nextAttemptBtn').disabled=true;$('manualAngle').value=0;$('manualLabel').textContent='0°';$('currentAngle').textContent='0';$('remainingAngle').textContent=target;$('liveBadge').classList.remove('running');$('liveStatus').textContent='READY FOR PATIENT ATTEMPT';$('handCaption').textContent='Ready for patient attempt. The 3D simulator follows the angle automatically.';$('coachMessage').textContent='Set the patient’s voluntary angle. The 3D model follows automatically; record once, then assist the remaining angle.';$('trendSummary').textContent='No attempts recorded yet.';$('attemptTrend').innerHTML='<span class="helper">Attempts will appear here after recording.</span>';$('assistNote').textContent='Servo assistance preview: waiting for sensor input. The calculated gap is illustrative and is not a safe motor command.';drawChart();updateMetrics();updateProgress();toast('Session reset');}
+function stopSession(){if(!sessionStarted){toast('No active session to save');return}running=false;history.unshift({date:new Date().toLocaleString(),timestamp:Date.now(),patient:patient.name,exercise,target,peak:maxAngle,reps,completion:Math.round(Math.min(100,maxAngle/Math.max(1,target)*100)),attempts:attemptHistory.map(a=>a.angle)});persistHistory();$('liveBadge').classList.remove('running');$('liveStatus').textContent='SESSION SAVED';sessionStarted=false;$('overviewSessions').textContent=history.length;$('overviewProgress').textContent=history[0].completion+'%';toast('Session saved to reports');renderReports();}
+function drawChart(){let svg=$('angleChart'),vals=readings;if(!vals.length){svg.innerHTML='<line x1="15" y1="120" x2="310" y2="120" stroke="#e8edf5"/><line x1="15" y1="75" x2="310" y2="75" stroke="#e8edf5" stroke-dasharray="3 4"/><line x1="15" y1="30" x2="310" y2="30" stroke="#e8edf5" stroke-dasharray="3 4"/><text x="15" y="142" font-size="9" fill="#8793a8">Waiting for readings</text>';return}let points=vals.map((v,i)=>`${15+i*(295/Math.max(1,vals.length-1))},${120-v/90*100}`).join(' ');let ty=120-target/90*100;svg.innerHTML=`<line x1="15" y1="120" x2="310" y2="120" stroke="#e8edf5"/><line x1="15" y1="75" x2="310" y2="75" stroke="#e8edf5" stroke-dasharray="3 4"/><line x1="15" y1="30" x2="310" y2="30" stroke="#e8edf5" stroke-dasharray="3 4"/><line x1="15" y1="${ty}" x2="310" y2="${ty}" stroke="#f2a84b" stroke-dasharray="5 4"/><polyline points="${points}" fill="none" stroke="#4668f5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${vals.map((v,i)=>`<circle cx="${15+i*(295/Math.max(1,vals.length-1))}" cy="${120-v/90*100}" r="3" fill="#4668f5"/>`).join('')}<text x="15" y="142" font-size="9" fill="#8793a8">Earlier</text><text x="280" y="142" font-size="9" fill="#8793a8">Latest</text>`;}
+function renderReports(){
+  $('reportSessions').textContent=history.length;
+  $('reportAverage').textContent=history.length?Math.round(history.reduce((s,x)=>s+x.completion,0)/history.length)+'%':'—';
+  $('reportPeak').textContent=history.length?Math.max(...history.map(x=>x.peak))+'°':'—';
+  $('reportExercise').textContent=exercise;$('overviewSessions').textContent=history.length;
+  let body=$('historyBody');
+  if(!history.length) body.innerHTML='<tr><td colspan="7" class="empty">No sessions saved yet. Start a live session and stop it to create a report.</td></tr>';
+  else body.innerHTML=history.map(x=>`<tr><td>${escapeHTML(x.date)}</td><td>${escapeHTML(x.patient)}</td><td>${escapeHTML(x.exercise)}</td><td>${x.target}°</td><td>${x.peak}°</td><td>${x.reps}</td><td><span class="pill">${x.completion}%</span></td></tr>`).join('');
+  drawReportCharts();
+}
+function drawReportCharts(){
+ const line=$('reportAngleChart'),comp=$('reportCompletionChart'),rep=$('reportRepChart');
+ const axis='#dce4df',ink='#728078',green='#3f8172',orange='#c58b4d';
+ function empty(svg,msg){svg.innerHTML=`<line x1="35" y1="175" x2="480" y2="175" stroke="${axis}"/><text x="18" y="105" font-size="12" fill="${ink}">${msg}</text>`}
+ if(!history.length){empty(line,'Save sessions to build a progress trend');empty(comp,'No saved reports yet');empty(rep,'Complete repetitions in a live session to see this chart');return}
+ const ordered=history.slice(0,8).reverse();
+ function lineChart(svg,key,maxVal,color,suffix){
+  const vals=ordered.map(x=>Number(x[key])||0),left=42,right=480,top=20,bottom=170;
+  const y=v=>bottom-(Math.min(maxVal,Math.max(0,v))/maxVal)*(bottom-top);
+  const x=i=>left+(ordered.length===1?(right-left)/2:i*(right-left)/(ordered.length-1));
+  let out='';
+  [0,.25,.5,.75,1].forEach(k=>{let yy=bottom-k*(bottom-top);out+=`<line x1="${left}" y1="${yy}" x2="${right}" y2="${yy}" stroke="${axis}" stroke-dasharray="3 4"/><text x="6" y="${yy+4}" font-size="10" fill="${ink}">${Math.round(maxVal*k)}${suffix}</text>`});
+  out+=`<polyline points="${vals.map((v,i)=>`${x(i)},${y(v)}`).join(' ')}" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;
+  vals.forEach((v,i)=>{out+=`<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="${color}"/><text x="${x(i)}" y="${Math.max(12,y(v)-10)}" text-anchor="middle" font-size="10" font-weight="700" fill="${color}">${v}${suffix}</text><text x="${x(i)}" y="194" text-anchor="middle" font-size="9" fill="${ink}">S${i+1}</text>`});
+  svg.innerHTML=out;
+ }
+ lineChart(line,'peak',Math.max(30,...ordered.map(x=>x.peak)),green,'°');
+ lineChart(comp,'completion',100,orange,'%');
+ const latest=history[0],angles=latest.attempts||[];
+ if(!angles.length){empty(rep,'Latest session has no recorded voluntary attempts');return}
+ const left=42,right=680,top=20,bottom=170,maxVal=Math.max(30,latest.target,...angles);
+ let out='';[0,.5,1].forEach(k=>{let yy=bottom-k*(bottom-top);out+=`<line x1="${left}" y1="${yy}" x2="${right}" y2="${yy}" stroke="${axis}" stroke-dasharray="3 4"/><text x="5" y="${yy+4}" font-size="10" fill="${ink}">${Math.round(maxVal*k)}°</text>`});
+ const bw=Math.min(52,(right-left)/angles.length*.55);
+ angles.forEach((v,i)=>{let x=left+(i+.5)*(right-left)/angles.length,h=v/maxVal*(bottom-top);out+=`<rect x="${x-bw/2}" y="${bottom-h}" width="${bw}" height="${h}" rx="5" fill="${green}"/><text x="${x}" y="${Math.max(12,bottom-h-7)}" text-anchor="middle" font-size="10" font-weight="700" fill="${green}">${v}°</text><text x="${x}" y="194" text-anchor="middle" font-size="10" fill="${ink}">Rep ${i+1}</text>`});
+ out+=`<line x1="${left}" y1="${bottom-latest.target/maxVal*(bottom-top)}" x2="${right}" y2="${bottom-latest.target/maxVal*(bottom-top)}" stroke="${orange}" stroke-dasharray="5 4"/>`;
+ rep.innerHTML=out;
+}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function exportReport(){if(!history.length){toast('No reports to export yet');return}let rows=[['Date & time','Patient','Exercise','Target angle','Peak angle','Repetitions','Completion','Voluntary attempt angles'],...history.map(x=>[x.date,x.patient,x.exercise,x.target,x.peak,x.reps,x.completion+'%',(x.attempts||[]).join(' | ')])];let csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='flexcare-session-report.csv';a.click();URL.revokeObjectURL(a.href);toast('CSV report exported');}
+$('sessionDate').value=new Date().toISOString().slice(0,10);
+drawChart();renderReports();
+
+// Keep the interactive patient input panel directly beside the 3D simulator on desktop.
+document.addEventListener('DOMContentLoaded', function(){
+  const side = document.querySelector('.fc3d-side');
+  const controlCard = document.querySelector('#session .session-layout > .card');
+  if(side && controlCard && !controlCard.classList.contains('session-control-card')){
+    controlCard.classList.add('session-control-card');
+    side.appendChild(controlCard);
+  }
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+(()=>{const canvas=document.getElementById('fc3dScene');if(!canvas||!window.THREE)return;const T=window.THREE;
+const scene=new T.Scene();scene.fog=new T.Fog(0x101d30,8,20);const camera=new T.PerspectiveCamera(37,1,.1,100);camera.position.set(4.4,3.2,7.4);
+const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance',precision:'highp'});renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,3));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;
+scene.add(new T.HemisphereLight(0xd8e9ff,0x253449,2.25));const key=new T.DirectionalLight(0xffffff,3.4);key.position.set(4,7,5);key.castShadow=true;key.shadow.mapSize.set(2048,2048);key.shadow.camera.near=.5;key.shadow.camera.far=20;key.shadow.camera.left=-5;key.shadow.camera.right=5;key.shadow.camera.top=5;key.shadow.camera.bottom=-5;key.shadow.bias=-0.00018;key.shadow.normalBias=.025;scene.add(key);const fill=new T.DirectionalLight(0x9fc9ff,1.15);fill.position.set(2,3,5);scene.add(fill);const rim=new T.DirectionalLight(0x43d8f0,2.0);rim.position.set(-4,3,-3);scene.add(rim);
+const mat=(c,m=.2,r=.42)=>new T.MeshStandardMaterial({color:c,metalness:m,roughness:r}),shell=mat(0xd7e0e8,.25,.38),dark=mat(0x263a51,.65,.3),cyan=mat(0x55d9e8,.55,.27),orange=mat(0xffad62,.45,.32),joint=mat(0x70e0ad,.25,.35),skin=mat(0xb98265,0,.72),floor=mat(0x15273b,.25,.65);
+const root=new T.Group();scene.add(root);
+function sphere(p,pos,scale,material){const o=new T.Mesh(new T.SphereGeometry(1,32,24),material);o.position.set(...pos);o.scale.set(...scale);o.castShadow=true;p.add(o);return o}
+function bar(p,a,b,r,material){a=new T.Vector3(...a);b=new T.Vector3(...b);const d=b.clone().sub(a),o=new T.Mesh(new T.CylinderGeometry(r,r,d.length(),24,1),material);o.position.copy(a.clone().add(b).multiplyScalar(.5));o.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.normalize());p.add(o);return o}
+const palm=new T.Mesh(new T.BoxGeometry(1.28,.18,1.55),skin);palm.position.set(0,1.05,0);root.add(palm);const plate=new T.Mesh(new T.BoxGeometry(1.34,.10,1.62),shell);plate.position.set(0,1.17,0);root.add(plate);const strap=new T.Mesh(new T.BoxGeometry(1.38,.12,.24),dark);strap.position.set(0,1.25,-.52);root.add(strap);
+const digits=[],defs=[{x:-.46,z:.76,l:[.42,.32,.24],w:.13},{x:-.16,z:.83,l:[.48,.36,.26],w:.14},{x:.16,z:.81,l:[.45,.34,.25],w:.135},{x:.45,z:.72,l:[.36,.28,.21],w:.115}];
+defs.forEach(d=>{const pivots=[];let parent=root,base=[d.x,1.2,d.z];sphere(root,base,[.105,.10,.105],joint);let cur=base;d.l.forEach(len=>{const pivot=new T.Group();pivot.position.set(...cur);parent.add(pivot);pivots.push(pivot);const seg=new T.Mesh(new T.CapsuleGeometry(d.w*.45,len*.47,8,16),shell);seg.rotation.x=Math.PI/2;seg.position.z=len*.48;pivot.add(seg);bar(pivot,[0,.085,.05],[0,.085,len*.85],.022,cyan);sphere(pivot,[0,.105,0],[.075,.06,.075],joint);sphere(pivot,[0,.11,len*.92],[.06,.055,.06],orange);parent=pivot;cur=[0,0,len*.88]});digits.push({pivots,d})});
+const tb=[-.67,1.13,-.13];sphere(root,tb,[.12,.11,.12],joint);const thumb=new T.Group();thumb.position.set(...tb);root.add(thumb);bar(thumb,[0,0,0],[-.18,0,.28],.075,shell);bar(thumb,[-.18,0,.28],[-.32,0,.53],.065,shell);bar(thumb,[0,.09,0],[-.3,.09,.48],.022,cyan);sphere(thumb,[-.18,.04,.28],[.065,.06,.065],orange);
+const cuff=new T.Mesh(new T.CylinderGeometry(.49,.52,.48,64,1),dark);cuff.position.set(0,.45,-.05);root.add(cuff);const cuffTop=new T.Mesh(new T.CylinderGeometry(.51,.51,.07,64,1),shell);cuffTop.position.set(0,.70,-.05);root.add(cuffTop);const motor=new T.Mesh(new T.BoxGeometry(.62,.36,.44),orange);motor.position.set(.37,.43,-.28);root.add(motor);const motorTop=new T.Mesh(new T.BoxGeometry(.42,.06,.30),dark);motorTop.position.set(.37,.63,-.28);root.add(motorTop);const screen=new T.Mesh(new T.BoxGeometry(.32,.025,.18),cyan);screen.position.set(.37,.67,-.28);root.add(screen);
+for(let i=0;i<3;i++){const band=new T.Mesh(new T.TorusGeometry(.505,.018,8,32),i===1?cyan:shell);band.rotation.x=Math.PI/2;band.position.y=.39+i*.12;band.position.z=-.05;root.add(band)}
+const ground=new T.Mesh(new T.CircleGeometry(3.8,96),floor);ground.rotation.x=-Math.PI/2;ground.position.y=-.02;scene.add(ground);const grid=new T.GridHelper(7.5,30,0x34506c,0x20364d);grid.position.y=-.005;scene.add(grid);
+let target=0,current=0,assist=65,drag=false,px=0,py=0,ry=.82,rx=-.04,zoom=6.4;const el=id=>document.getElementById('fc3d'+id);
+function apply(v){const f=T.MathUtils.clamp(v,0,85)*Math.PI/180;digits.forEach((d,i)=>d.pivots.forEach((p,j)=>{p.rotation.x=-(f*(j===0?.62:j===1?.78:1.0));}));thumb.rotation.x=-f*.45;thumb.rotation.y=-f*.18;el('AngleRead').textContent='FLEXION '+Math.round(v)+'°';el('MetricAngle').textContent=Math.round(v)+'°';}
+function setTarget(v){target=T.MathUtils.clamp(+v,0,85);}
+window.flexcare3DSetAngle=function(v,mode){setTarget(v);el('ServoState').textContent=mode==='assisting'?'ASSISTING':mode==='voluntary'?'PATIENT ATTEMPT':mode==='recorded'?'ATTEMPT LOCKED':mode==='opening'?'OPENING':'HOLDING';};
+
+canvas.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!drag)return;ry+=(e.clientX-px)*.008;rx=T.MathUtils.clamp(rx+(e.clientY-py)*.006,-.9,.8);px=e.clientX;py=e.clientY});canvas.addEventListener('pointerup',()=>drag=false);canvas.addEventListener('pointercancel',()=>drag=false);canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=T.MathUtils.clamp(zoom+e.deltaY*.008,4.5,11)},{passive:false});
+function resize(){const r=canvas.getBoundingClientRect();if(!r.width||!r.height)return;renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,3));renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix()}window.addEventListener('resize',resize);setTimeout(resize,100);
+const clock=new T.Clock();function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.04);current+=(target-current)*Math.min(1,dt*5.5);if(Math.abs(target-current)<0.12)current=target;apply(current);root.rotation.y+=(ry-root.rotation.y)*.12;root.rotation.x+=(rx-root.rotation.x)*.12;camera.position.set(Math.sin(ry)*zoom,2.2+Math.sin(rx)*1.5,Math.cos(ry)*zoom);camera.lookAt(0,.95,.3);renderer.render(scene,camera)}animate();
+})();
+</script>
+
+</body>
+</html>
